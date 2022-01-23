@@ -9,7 +9,7 @@ services:
       args:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
-    command:   python dashboard.py
+    command: /opt/wgd.sh start
     restart: unless-stopped 
     ports:
       - 10086:10086
