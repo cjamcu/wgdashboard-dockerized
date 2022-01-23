@@ -16,7 +16,7 @@ RUN  cd /etc/wireguard/ && echo "[Interface]" >> wg0.conf && echo -n "SaveConfig
     && echo  "ListenPort = ${WG_LISTENPORT}" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
 
 COPY ./src /opt/WGDashboard
-RUN pip3 install -r /opt/WGDashboard/src/requirements.txt   --no-cache-dir
+RUN pip3 install -r /opt/WGDashboard/requirements.txt   --no-cache-dir
 
 WORKDIR /opt/WGDashboard 
 
