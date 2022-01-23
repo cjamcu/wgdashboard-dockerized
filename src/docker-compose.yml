@@ -9,6 +9,9 @@ services:
       args:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
+    
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
     command: /opt/WGDashboard/src/wgd.sh debug
     restart: unless-stopped 
     ports:
