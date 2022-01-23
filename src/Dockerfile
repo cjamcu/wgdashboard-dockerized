@@ -11,7 +11,7 @@ RUN mkdir -p /etc/wireguard/
 RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publick
 
 RUN  cd /etc/wireguard/ && echo "[Interface]" >> wg0.conf &&  echo -n "PrivateKey = " >> wg0.conf && cat privatekey >> wg0.conf   && cat privatekey | wg pubkey >> wg0.conf \
-    && echo  "ListenPort = $WG_LISTENPORT" >> wg0.conf && echo  "Address = WG_ADDRESS" >> wg0.conf  && chmod 700 wg0.conf
+    && echo  "ListenPort = ${WG_LISTENPORT)" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
 
 COPY . /opt/WGDashboard/src
 RUN pip3 install -r /opt/WGDashboard/src/requirements.txt   --no-cache-dir
