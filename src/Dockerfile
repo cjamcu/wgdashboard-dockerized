@@ -4,7 +4,7 @@ ARG WG_ADDRESS=$WG_ADDRESS
 ARG WG_LISTENPORT=$WG_LISTENPORT
 
 RUN apt-get update && \
- apt-get install -y --no-install-recommends wireguard-tools iptables nano net-tools procps openresolv inotify-tools && \
+ apt-get install -y --no-install-recommends wireguard-tools iptables nano net-tools python3 procps openresolv inotify-tools && \
  apt-get clean
 
 RUN mkdir -p /etc/wireguard/
