@@ -9,7 +9,7 @@ services:
       args:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
-    command: /opt/WGDashboard/src/wgd.sh start
+    command: /opt/WGDashboard/src/wgd.sh debug
     restart: unless-stopped 
     ports:
       - 10086:10086
