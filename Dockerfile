@@ -19,7 +19,7 @@ RUN  cd /etc/wireguard/ && echo "[Interface]" > wg0.conf && echo "SaveConfig = t
 COPY ./src /opt/WGDashboard_tmp
 RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
 RUN rm -rf /opt/WGDashboard_tmp
-#WORKDIR /opt/WGDashboard 
+WORKDIR /opt/wgdashboard 
 
 #RUN chmod u+x wgd.sh
 
