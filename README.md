@@ -362,6 +362,7 @@ Endpoint = 0.0.0.0:51820
 3. Install
 
    ```shell
+   cd src
    ./wgd.sh install
    ```
 
