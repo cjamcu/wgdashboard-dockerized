@@ -18,4 +18,4 @@ services:
       - ./src:/opt/wgdashboard
     ports:
       - 10086:10086
-      - ${WG_LISTENPORT}:51820/udp
+      - 51820:${WG_LISTENPORT}/udp
