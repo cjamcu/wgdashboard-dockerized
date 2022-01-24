@@ -8,6 +8,7 @@ RUN apt-get update && \
  apt-get clean
 
 RUN mkdir -p /etc/wireguard/
+RUN mkdir -p /opt/wgdashboard
 
 # configure wireguard
 RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
@@ -15,17 +16,17 @@ RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard
 RUN  cd /etc/wireguard/ && echo "[Interface]" > wg0.conf && echo "SaveConfig = true" >> wg0.conf && echo -n "PrivateKey = " >> wg0.conf && cat privatekey >> wg0.conf \
     && echo  "ListenPort = ${WG_LISTENPORT}" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
 
-COPY ./src /opt/WGDashboard
-RUN pip3 install -r /opt/WGDashboard/requirements.txt   --no-cache-dir
+COPY ./src /opt/WGDashboard_tmp
+RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
+RUN rm -rf /opt/WGDashboard_tmp
+#WORKDIR /opt/WGDashboard 
 
-WORKDIR /opt/WGDashboard 
+#RUN chmod u+x wgd.sh
 
-RUN chmod u+x wgd.sh
-
-RUN ./wgd.sh install
-RUN ./wgd.sh start
-RUN ./wgd.sh stop
-RUN echo "#!/bin/bash" > /entrypoint.sh && echo "wg-quick up wg0" >> /entrypoint.sh && echo "sh /opt/WGDashboard/wgd.sh start" >> /entrypoint.sh && echo "sleep infinity" >> /entrypoint.sh
+#RUN ./wgd.sh install
+#RUN ./wgd.sh start
+#RUN ./wgd.sh stop
+RUN echo "#!/bin/bash" > /entrypoint.sh && echo "wg-quick up wg0" >> /entrypoint.sh && echo "chmod u+x /opt/wgdashboard/wgd.sh" >> /entrypoint.sh && echo "sh /opt/WGDashboard/wgd.sh install" >> /entrypoint.sh && echo "sh /opt/WGDashboard/wgd.sh start" >> /entrypoint.sh && echo "sleep infinity" >> /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
