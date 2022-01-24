@@ -26,4 +26,4 @@ ENTRYPOINT ["/entrypoint.sh"]
 WORKDIR /opt/wgdashboard 
 
 EXPOSE 10086
-EXPOSE 51820/udp
+EXPOSE ${WG_LISTENPORT}/udp
