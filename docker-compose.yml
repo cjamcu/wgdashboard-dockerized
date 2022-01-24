@@ -15,6 +15,7 @@ services:
     restart: unless-stopped 
     volumes:
       - /lib/modules:/lib/modules
+      - ./src:/opt/wgdashboard
     ports:
       - 10086:10086
       - ${WG_LISTENPORT}:51820/udp
