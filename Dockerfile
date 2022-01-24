@@ -25,9 +25,9 @@ RUN chmod u+x wgd.sh
 RUN ./wgd.sh install
 RUN ./wgd.sh start
 RUN ./wgd.sh stop
-RUN echo systemctl enable --now wg-quick@wg0 > /entrypoint.sh && echo sh ./opt/WGDashboard/wgd.sh start >> entrypoint.sh && echo sleep infinity >> /entrypoint.sh
+RUN echo "systemctl enable --now wg-quick@wg0" > /entrypoint.sh && echo "sh ./opt/WGDashboard/wgd.sh start" >> entrypoint.sh && echo "sleep infinity" >> /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 10086
 EXPOSE 51820/udp
