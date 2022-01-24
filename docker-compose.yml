@@ -8,7 +8,6 @@ services:
       dockerfile: ./Dockerfile
       args:
         WG_ADDRESS: ${WG_ADDRESS}
-        WG_LISTENPORT: ${WG_LISTENPORT}
     cap_add: 
       - NET_ADMIN
       - SYS_MODULE
