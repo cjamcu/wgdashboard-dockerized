@@ -9,8 +9,12 @@ services:
       args:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
-
+    cap-add: 
+      - NET_ADMIN
+      - SYS_MODULE
     restart: unless-stopped 
+    volumes:
+      - /lib/modules:/lib/modules
     ports:
       - 10086:10086
       - ${WG_LISTENPORT}:51820/udp
