@@ -9,7 +9,7 @@ services:
       args:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
-    cap-add: 
+    cap_add: 
       - NET_ADMIN
       - SYS_MODULE
     restart: unless-stopped 
