@@ -10,7 +10,7 @@ services:
         WG_ADDRESS: ${WG_ADDRESS}
         WG_LISTENPORT: ${WG_LISTENPORT}
 
-    command: /opt/WGDashboard/wgd.sh start
+    command: sh /entrypoint.sh
     restart: unless-stopped 
     ports:
       - 10086:10086
