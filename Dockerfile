@@ -19,19 +19,11 @@ RUN  cd /etc/wireguard/ && echo "[Interface]" > wg0.conf && echo "SaveConfig = t
 COPY ./src /opt/WGDashboard_tmp
 RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
 RUN rm -rf /opt/WGDashboard_tmp
-WORKDIR /opt/wgdashboard 
-
-#RUN chmod u+x wgd.sh
-
-#RUN ./wgd.sh install
-#RUN ./wgd.sh start
-#RUN ./wgd.sh stop
-#RUN echo "#!/bin/bash" > /entrypoint.sh && echo "wg-quick up wg0" >> /entrypoint.sh && echo "chmod u+x /opt/wgdashboard/wgd.sh" >> /entrypoint.sh \
-#    && echo "sh /opt/wgdashboard/wgd.sh install" >> /entrypoint.sh && echo "sh /opt/wgdashboard/wgd.sh start" >> /entrypoint.sh \
-#    && echo "sleep infinity" >> /entrypoint.sh
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
+
 ENTRYPOINT ["/entrypoint.sh"]
+WORKDIR /opt/wgdashboard 
 
 EXPOSE 10086
 EXPOSE 51820/udp
