@@ -4,7 +4,7 @@ ARG WG_ADDRESS=$WG_ADDRESS
 ARG WG_LISTENPORT=$WG_LISTENPORT
 
 RUN apt-get update && \
- apt-get install -y --no-install-recommends wireguard-tools iptables nano net-tools python3 python3-pip procps openresolv inotify-tools && \
+ apt-get install -y --no-install-recommends wireguard-tools iptables nano net-tools python3 python3-pip python3-venv procps openresolv inotify-tools && \
  apt-get clean
 
 RUN mkdir -p /etc/wireguard/
@@ -23,7 +23,9 @@ WORKDIR /opt/WGDashboard
 RUN chmod u+x wgd.sh
 
 RUN ./wgd.sh install
-
+RUN ./wgd.sh start
+RUN ./wgd.sh stop
+RUN systemctl enable wg-quick@wg0
 
 EXPOSE 10086
 EXPOSE 51820/udp
