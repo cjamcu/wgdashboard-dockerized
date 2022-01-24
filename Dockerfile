@@ -25,7 +25,7 @@ RUN chmod u+x wgd.sh
 RUN ./wgd.sh install
 RUN ./wgd.sh start
 RUN ./wgd.sh stop
-RUN echo "#!/bin/bash" > /entrypoint.sh && echo "systemctl enable --now wg-quick@wg0" >> /entrypoint.sh && echo "sh ./opt/WGDashboard/wgd.sh start" >> entrypoint.sh && echo "sleep infinity" >> /entrypoint.sh
+RUN echo "#!/bin/bash" > /entrypoint.sh && echo "wg-quick up wg0" >> /entrypoint.sh && echo "sh ./opt/WGDashboard/wgd.sh start" >> entrypoint.sh && echo "sleep infinity" >> /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
