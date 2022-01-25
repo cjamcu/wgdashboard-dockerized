@@ -9,3 +9,13 @@ Requires host with `docker` and `docker-compose` installed, as well as a kernel 
 3. `docker-compose build`
   
 4. `docker-compose up -d`
+
+To update:
+
+```shell
+git pull
+docker-compose build --no-cache
+docker-compose up -d
+```
+
+
