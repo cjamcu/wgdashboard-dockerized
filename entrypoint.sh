@@ -2,8 +2,10 @@
 
 if [ ! -f "/etc/wireguard/*.conf" ]; then
   mv /*.conf /etc/wireguard
+  echo "Moved conf file to /etc/wireguard"
 else
   rm /*.conf
+  echo "Removed unneeded conf file"
 fi
 
 wg-quick up wg0
