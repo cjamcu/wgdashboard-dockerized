@@ -8,9 +8,10 @@ cd wgdashboard-dockerized
 ```  
 Edit .env file to set subnet for internal Wireguard server 
 
-`docker-compose build`  
-`docker-compose up -d`
-
+```shell
+docker-compose build  
+docker-compose up -d
+```
 To update:
 
 ```shell
