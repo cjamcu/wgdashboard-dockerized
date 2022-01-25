@@ -2,9 +2,10 @@ Installation under Docker:
 
 Requires host with `docker` and `docker-compose` installed, as well as a kernel with wireguard support (either >5.6 or with backports)
 
-`git clone https://github.com/ikidd/wgdashboard-dockerized`
-`cd wgdashboard-dockerized`
-  
+```shell
+git clone https://github.com/ikidd/wgdashboard-dockerized
+cd wgdashboard-dockerized
+```  
 Edit .env file to set subnet for internal Wireguard server 
 
 `docker-compose build`  
