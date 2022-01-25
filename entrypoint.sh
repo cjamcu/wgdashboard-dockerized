@@ -1,5 +1,11 @@
 #!/bin/bash
-mv /*.conf /etc/wireguard
+
+if [ ! -f "/etc/wireguard/*.conf" ]; then
+  mv /*.conf /etc/wireguard
+else
+  rm /*.conf
+fi
+
 wg-quick up wg0
 chmod u+x /opt/wgdashboard/wgd.sh
 if [ ! -f "/opt/wgdashboard/wg-dashboard.ini" ]; then
