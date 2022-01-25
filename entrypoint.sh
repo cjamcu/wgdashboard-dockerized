@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f "/etc/wireguard/*.conf" ]; then
+if [ -z "$(ls -A /etc/wireguard)" ]; then
   mv /*.conf /etc/wireguard
   echo "Moved conf file to /etc/wireguard"
 else
