@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
 ARG WG_ADDRESS=$WG_ADDRESS
+ARG WG_CONF_NAME=$WG_CONF_NAME
 
 RUN apt-get update && \
  apt-get install -y --no-install-recommends iproute2 wireguard-tools iptables nano net-tools python3 python3-pip python3-venv procps openresolv inotify-tools && \
@@ -10,10 +11,10 @@ RUN mkdir -p /etc/wireguard/
 RUN mkdir -p /opt/wgdashboard
 
 # configure wireguard
-#RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
+RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
 
-#RUN  cd / && echo "[Interface]" > wg0.conf && echo "SaveConfig = true" >> wg0.conf && echo -n "PrivateKey = " >> wg0.conf && cat privatekey >> wg0.conf \
-#    && echo  "ListenPort = 51820" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
+RUN  cd / && echo "[Interface]" > ${WG_CONF_NAME}.conf && echo "SaveConfig = true" >> ${WG_CONF_NAME}.conf && echo -n "PrivateKey = " >> ${WG_CONF_NAME}.conf && cat privatekey >> ${WG_CONF_NAME}.conf \
+    && echo  "ListenPort = 51820" >> ${WG_CONF_NAME}.conf && echo  "Address = ${WG_ADDRESS}" >> ${WG_CONF_NAME}.conf  && chmod 700 ${WG_CONF_NAME}.conf
 
 COPY ./src /opt/WGDashboard_tmp
 RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
