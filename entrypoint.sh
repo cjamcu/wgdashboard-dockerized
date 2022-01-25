@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if [ -z "$(ls -A /etc/wireguard)" ]; then
-  mv /*.conf /etc/wireguard
+  mv /wg0.conf /etc/wireguard
   echo "Moved conf file to /etc/wireguard"
 else
-  rm /*.conf
+  rm wg0.conf
   echo "Removed unneeded conf file"
 fi
 
