@@ -10,10 +10,10 @@ RUN mkdir -p /etc/wireguard/
 RUN mkdir -p /opt/wgdashboard
 
 # configure wireguard
-RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
+#RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
 
-RUN  cd /etc/wireguard/ && echo "[Interface]" > wg0.conf && echo "SaveConfig = true" >> wg0.conf && echo -n "PrivateKey = " >> wg0.conf && cat privatekey >> wg0.conf \
-    && echo  "ListenPort = 51820" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
+#RUN  cd / && echo "[Interface]" > wg0.conf && echo "SaveConfig = true" >> wg0.conf && echo -n "PrivateKey = " >> wg0.conf && cat privatekey >> wg0.conf \
+#    && echo  "ListenPort = 51820" >> wg0.conf && echo  "Address = ${WG_ADDRESS}" >> wg0.conf  && chmod 700 wg0.conf
 
 COPY ./src /opt/WGDashboard_tmp
 RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
