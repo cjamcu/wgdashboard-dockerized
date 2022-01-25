@@ -9,16 +9,16 @@ RUN apt-get update && \
 
 RUN mkdir -p /etc/wireguard/
 RUN mkdir -p /opt/wgdashboard
-
+RUN mkdir -p /opt/wgdashboard_tmp
 # configure wireguard
-RUN wg genkey |  tee /tmp/privatekey | wg pubkey |  tee /tmp/publickey
+RUN wg genkey |  tee /opt/wgdashboard_tmp/privatekey | wg pubkey |  tee /opt/wgdashboard_tmp/publickey
 
-RUN  cd / && echo "[Interface]" > ${WG_CONF_NAME}.conf && echo "SaveConfig = true" >> ${WG_CONF_NAME}.conf && echo -n "PrivateKey = " >> ${WG_CONF_NAME}.conf && cat /tmp/privatekey >> ${WG_CONF_NAME}.conf \
+RUN  cd / && echo "[Interface]" > ${WG_CONF_NAME}.conf && echo "SaveConfig = true" >> ${WG_CONF_NAME}.conf && echo -n "PrivateKey = " >> ${WG_CONF_NAME}.conf && cat /opt/wgdashboard_tmp/privatekey >> ${WG_CONF_NAME}.conf \
     && echo  "ListenPort = 51820" >> ${WG_CONF_NAME}.conf && echo  "Address = ${WG_ADDRESS}" >> ${WG_CONF_NAME}.conf  && chmod 700 ${WG_CONF_NAME}.conf
 
-COPY ./src /opt/WGDashboard_tmp
-RUN pip3 install -r /opt/WGDashboard_tmp/requirements.txt   --no-cache-dir
-RUN rm -rf /opt/WGDashboard_tmp
+COPY ./src /opt/wgdashboard_tmp
+RUN pip3 install -r /opt/wgdashboard_tmp/requirements.txt   --no-cache-dir
+RUN rm -rf /opt/wgdashboard_tmp
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
