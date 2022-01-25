@@ -11,9 +11,9 @@ RUN mkdir -p /etc/wireguard/
 RUN mkdir -p /opt/wgdashboard
 
 # configure wireguard
-RUN wg genkey |  tee /etc/wireguard/privatekey | wg pubkey |  tee /etc/wireguard/publickey
+RUN wg genkey |  tee /tmp/privatekey | wg pubkey |  tee /tmp/publickey
 
-RUN  cd / && echo "[Interface]" > ${WG_CONF_NAME}.conf && echo "SaveConfig = true" >> ${WG_CONF_NAME}.conf && echo -n "PrivateKey = " >> ${WG_CONF_NAME}.conf && cat privatekey >> ${WG_CONF_NAME}.conf \
+RUN  cd / && echo "[Interface]" > ${WG_CONF_NAME}.conf && echo "SaveConfig = true" >> ${WG_CONF_NAME}.conf && echo -n "PrivateKey = " >> ${WG_CONF_NAME}.conf && cat /tmp/privatekey >> ${WG_CONF_NAME}.conf \
     && echo  "ListenPort = 51820" >> ${WG_CONF_NAME}.conf && echo  "Address = ${WG_ADDRESS}" >> ${WG_CONF_NAME}.conf  && chmod 700 ${WG_CONF_NAME}.conf
 
 COPY ./src /opt/WGDashboard_tmp
