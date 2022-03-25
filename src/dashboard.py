@@ -30,7 +30,7 @@ from util import regex_match, check_DNS, check_Allowed_IPs, check_remote_endpoin
     check_IP_with_range, clean_IP_with_range
 
 # Dashboard Version
-DASHBOARD_VERSION = 'v3.0.5'
+DASHBOARD_VERSION = 'v3.0.6'
 
 # WireGuard's configuration path
 WG_CONF_PATH = None
@@ -653,7 +653,10 @@ def auth_req():
             else:
                 session['message'] = ""
             conf.clear()
-            return redirect("/signin?redirect=" + str(request.url))
+            redirectURL = str(request.url)
+            redirectURL = redirectURL.replace("http://", "")
+            redirectURL = redirectURL.replace("https://", "")
+            return redirect("/signin?redirect=" + redirectURL)
     else:
         if request.endpoint in ['signin', 'signout', 'auth', 'settings', 'update_acct', 'update_pwd',
                                 'update_app_ip_port', 'update_wg_conf_path']:
@@ -679,7 +682,7 @@ def signin():
     if "message" in session:
         message = session['message']
         session.pop("message")
-    return render_template('signin.html', message=message)
+    return render_template('signin.html', message=message, version=DASHBOARD_VERSION)
 
 
 # Sign Out
