@@ -15,7 +15,7 @@ services:
     volumes:
       - /lib/modules:/lib/modules
       - ./src:/opt/wgdashboard
-      - ./config:/etc/wireguard
+      - ./config:/root/wireguard
     ports:
       - 10086:10086
-      - 51820:51820/udp
+      - 51821:51820/udp
